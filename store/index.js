@@ -1,7 +1,7 @@
 export const state = () => ({
   logged: false,
   token: null,
-  user: null
+  user: null,
 })
 
 export const mutations = {
@@ -13,14 +13,14 @@ export const mutations = {
   },
   SET_USER(state, payload) {
     state.user = payload
-  }
+  },
 }
 
 export const actions = {
   async nuxtServerInit({ commit }, { req, route, redirect }) {
     let [{ cookieService }, { tokenService }] = await Promise.all([
-      import('../api/internal/service/cookie'),
-      import('../api/internal/service/token')
+      import('../blogxon-public/api/internal/service/cookie'),
+      import('../blogxon-public/api/internal/service/token'),
     ])
 
     let token = cookieService.getTokenFromCookie(req)
@@ -33,8 +33,8 @@ export const actions = {
       commit('SET_USER', _id)
       if (route.path == '/admin') redirect('/dashboard')
     }
-  }
+  },
 }
 export const getters = {
-  logged: state => state.logged
+  logged: (state) => state.logged,
 }

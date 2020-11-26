@@ -15,7 +15,7 @@ import {
   subscriber
 } from '../internal/subscribers/subscriberFunctions'
 
-import { config } from '../../config'
+import { config } from "../../config"
 import { conn } from "../internal/config/connection"
 export {
   adminService,
