@@ -8,14 +8,21 @@ import mongoose from "mongoose"
 
 export default function (context: Context, inject: Inject) {
   inject('blogxon', {
-    getBlogs: (): Promise<Omit<BlogQueryInterface, "content">[]> => fetch(`http://localhost:${config.port}/api/internal/blogs`).then(res => res.json()),
-    getBlogById: (_id: string | mongoose.Types.ObjectId): Promise<BlogQueryInterface> => fetch(`http://localhost:${config.port}/api/internal/getBlog/${_id}`).then(res => res.json()),
-    getBlogBySlug: (slug: string): Promise<BlogQueryInterface> => fetch(`http://localhost:${config.port}/api/internal/getBlogBySlug/${slug}`).then(res => res.json()),
+    url: process.env.NODE_ENV !== "production" ? "http://localhost" : config.domain,
+    getBlogs(): Promise<Omit<BlogQueryInterface, "content">[]> {
+      return fetch(`${this.url}:${config.port}/api/internal/blogs`).then(res => res.json())
+    },
+    getBlogById(_id: string | mongoose.Types.ObjectId): Promise<BlogQueryInterface> {
+      return fetch(`${this.url}:${config.port}/api/internal/getBlog/${_id}`).then(res => res.json())
+    },
+    getBlogBySlug(slug: string): Promise<BlogQueryInterface> {
+      return fetch(`${this.url}:${config.port}/api/internal/getBlogBySlug/${slug}`).then(res => res.json())
+    },
     askPermission: async (): Promise<Boolean> => {
       const permissionResult = await Notification.requestPermission()
       return permissionResult === 'granted'
     },
-    subscribe: async (swPath: string = "/sw.js") => {
+    async subscribe(swPath: string = "/sw.js") {
       let registration = await navigator.serviceWorker.register(swPath)
       const PUBLIC_KEY = context.env.VAPID_PUBLIC
       if (!PUBLIC_KEY) {
@@ -31,7 +38,7 @@ export default function (context: Context, inject: Inject) {
       try {
         fetch({
           method: "post",
-          url: `http://localhost:${config.port}/api/internal/subscribe`,
+          url: `${this.url}:${config.port}/api/internal/subscribe`,
           //@ts-expect-error
           body: JSON.stringify(subscription)
         })
