@@ -163,3 +163,22 @@ Current configuration options by default:
     images_webp_path: '/images_webp',
     blogpost_view_schedule: "0 */2 * * *",
     badge_path: "/badge"
+
+## Error log
+
+The internal controllers fetches every 500 status code errors.
+
+You can read about the error in the `error.log` file in the root directory
+
+### Write errors to the log file
+
+You can also write errors to the log file.
+Import the `errorService` instance and use the `writeErrorLog` method:
+
+```javascript
+try {
+    let blog = await someRequest(...)
+}catch(err) {
+    await writeErrorLog(err, "name of the method where it happend")
+}
+```
