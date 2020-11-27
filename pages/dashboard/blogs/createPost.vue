@@ -120,6 +120,7 @@
     <mdPreview v-if="textPreview" :text="post" />
 
     <primary
+      class="mb-5"
       @click.native="uploadPost"
       :disabled="disabled"
       style="margin-left: auto"
