@@ -19,6 +19,8 @@ import { ConfigurationInterface, ConstantsInterface } from "./types"
  * @property {Object} thumbnail_sizes - Object that contains "width" and "height" for the thumbnail size
  * @property {string} images_path - Sets the path for images
  * @property {string} images_webp_path - Sets the path for WEBP images
+ * @property {string} blogpost_view_schedule - Schedul for cronjob. It updates the "views" field on the blog posts
+ * @property {string} badge_path - Path for the badges
  */
 export const config: ConfigurationInterface = {
   saltRounds: 10,
