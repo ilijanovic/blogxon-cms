@@ -1,25 +1,45 @@
 <template>
   <div class="admin">
-    <div class="login">
-      <h1>Generate admin account</h1>
-      <small style="margin: 20px 0"
-        >If its your first time, you will need to create an admin acccount. You
+    <div
+      class="shadow-md p-3 rounded-md border container mx-auto mt-20 max-w-xl px-6"
+    >
+      <h1 class="text-xl my-5">Generate admin account</h1>
+      <label class="block mb-1">
+        If its your first time, you will need to create an admin acccount. You
         can do it here. Type in your email adress and password. This will be
         your admin account where you can login to the admin panel. After
-        successful generation this site won't be available again.</small
+        successful generation this site won't be available again.</label
       >
-      <div class="inputbox">
-        <small>Email</small>
-        <input @keyup.enter="login" v-model="email" />
+
+      <div class="mb-5 mt-5 text-gray-700">
+        <label class="block mb-1" for="forms-helpTextCode">Email</label>
+        <input
+          class="w-full h-10 py-6 px-4 text-base placeholder-gray-600 border rounded-md focus:outline-none"
+          @keyup.enter="login"
+          v-model="email"
+        />
       </div>
-      <div class="inputbox">
-        <small>Password</small>
-        <input @keyup.enter="login" type="password" v-model="password" />
+      <div class="my-5 text-gray-700">
+        <label class="block mb-1" for="forms-helpTextCode">Password</label>
+        <input
+          class="w-full h-10 py-6 px-4 text-base placeholder-gray-600 border rounded-md focus:outline-none"
+          type="password"
+          @keyup.enter="login"
+          v-model="password"
+        />
       </div>
-      <div class="inputbox">
-        <small>Password confirm</small>
-        <input @keyup.enter="login" type="password" v-model="passwordConfirm" />
+      <div class="my-5 text-gray-700">
+        <label class="block mb-1" for="forms-helpTextCode"
+          >Password confirm</label
+        >
+        <input
+          class="w-full h-10 py-6 px-4 text-base placeholder-gray-600 border rounded-md focus:outline-none"
+          @keyup.enter="login"
+          type="password"
+          v-model="passwordConfirm"
+        />
       </div>
+
       <primary
         :disabled="loading"
         :loading="loading"
@@ -68,22 +88,3 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-.login {
-  margin: 30px auto;
-  max-width: 600px;
-  width: 100%;
-  padding: 15px;
-  small {
-    font-size: 16px;
-    color: grey;
-    display: block;
-  }
-  .inputbox {
-    margin: 20px 0;
-    input {
-      width: 100%;
-    }
-  }
-}
-</style>
