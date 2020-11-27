@@ -1,20 +1,6 @@
-# Blogxon
+## Blogxon headless blog system
 
-## Build Setup
+Blogxon is a simple headless CMS system. Its made to be developer friendly as easy to use.
+Its build up on Nuxt.js in universal mode. Its backend is powered by Express.js and as database it uses MongoDB.
 
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+**Please do not use this software for now. Is not finished yet**
