@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-md mx-auto">
+  <div class="box max-w-screen-md mx-auto">
     <h1 class="my-5 text-xl">Create blog post</h1>
     <div class="my-5">
       <div class="flex justify-between">
@@ -247,3 +247,10 @@ export default {
   layout: 'dashboard',
 }
 </script>
+<style lang="scss">
+.box {
+  /deep/ .te-markdown-tab-section {
+    display: none !important;
+  }
+}
+</style>
