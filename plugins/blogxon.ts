@@ -10,6 +10,48 @@ export default function (context: Context, inject: Inject) {
   inject('blogxon', {
     getBlogs: (): Promise<Omit<BlogQueryInterface, "content">[]> => fetch(`http://localhost:${config.port}/api/internal/blogs`).then(res => res.json()),
     getBlogById: (_id: string | mongoose.Types.ObjectId): Promise<BlogQueryInterface> => fetch(`http://localhost:${config.port}/api/internal/getBlog/${_id}`).then(res => res.json()),
-    getBlogBySlug: (slug: string): Promise<BlogQueryInterface> => fetch(`http://localhost:${config.port}/api/internal/getBlogBySlug/${slug}`).then(res => res.json())
+    getBlogBySlug: (slug: string): Promise<BlogQueryInterface> => fetch(`http://localhost:${config.port}/api/internal/getBlogBySlug/${slug}`).then(res => res.json()),
+    askPermission: async (): Promise<Boolean> => {
+      const permissionResult = await Notification.requestPermission()
+      return permissionResult === 'granted'
+    },
+    subscribe: async (swPath: string = "/sw.js") => {
+      let registration = await navigator.serviceWorker.register(swPath)
+      const PUBLIC_KEY = context.env.VAPID_PUBLIC
+      if (!PUBLIC_KEY) {
+        throw "No Public key"
+      }
+      const subscribeOptions = {
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(PUBLIC_KEY),
+      }
+      let subscription = await registration.pushManager.subscribe(
+        subscribeOptions
+      )
+      try {
+        fetch({
+          method: "post",
+          url: `http://localhost:${config.port}/api/internal/subscribe`,
+          //@ts-expect-error
+          body: JSON.stringify(subscription)
+        })
+      } catch (err) {
+        return err
+      }
+    }
   })
+}
+
+function urlBase64ToUint8Array(base64String: string) {
+  var padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+  var base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/')
+  console.log(base64)
+  var rawData = window.atob(base64)
+  var outputArray = new Uint8Array(rawData.length)
+  for (var i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i)
+  }
+  return outputArray
 }

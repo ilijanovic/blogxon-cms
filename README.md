@@ -67,6 +67,18 @@ You can fetch an blog by its mongodb ID or slug
 ```javascript
 $blogxon.getBlogById(id)
 $blogxon.getBlogBySlug(slug)
+
+/**
+ * Asks user for permission to send notification
+ * @return Resolves true if granted otherwise false
+ */
+$blogxon.askPermission()
+
+/**
+ * Subscribe user
+ * @return Returns promise
+ */
+$blogxon.subscribe()
 ```
 
 ## Custom REST API

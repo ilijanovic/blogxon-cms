@@ -4,6 +4,8 @@
     <nuxt-link to="/admin">
       <primary>Admin</primary>
     </nuxt-link>
+
+    <primary @click.native="subscribe">Subscribe to push</primary>
     <div class="flex flex-wrap">
       <div
         class="flex-col mr-5 max-w-20 justify-between flex shadow-md flex-1 mx-auto my-5 rounded-md border p-4"
@@ -30,6 +32,20 @@ export default {
   async asyncData({ $blogxon }) {
     let blogs = await $blogxon.getBlogs()
     return { blogs }
+  },
+  methods: {
+    async subscribe() {
+      try {
+        let granted = await this.$blogxon.askPermission()
+        if (granted) {
+          await this.$blogxon.subscribe()
+          alert('subscribed')
+        }
+      } catch (err) {
+        console.log(err)
+        alert('something went wrong')
+      }
+    },
   },
 }
 </script>
