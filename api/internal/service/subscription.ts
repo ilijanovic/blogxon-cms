@@ -3,6 +3,7 @@ import webpush from "web-push"
 import Badge from "../model/badge"
 import { SubscriptionInterface, ModelSubscriptionInterface, NotificationInterface, BadgeInterface } from "../../../types"
 import mongoose from "mongoose"
+import { config } from '~/config'
 
 class SubscriptionService {
   public subscribe(sub: SubscriptionInterface): Promise<ModelSubscriptionInterface> {
@@ -29,7 +30,7 @@ class SubscriptionService {
       subscriptions.map((subscription: SubscriptionInterface) => {
         return webpush.sendNotification(subscription, jsonData, {
           vapidDetails: {
-            subject: 'https://blogxon.com',
+            subject: config.domain,
             publicKey: process.env.VAPID_PUBLIC!,
             privateKey: process.env.VAPID_PRIVATE!,
           },
