@@ -39,7 +39,7 @@ export default function (context: Context, inject: Inject) {
       try {
         return fetch(`${url}/api/internal/subscribe`, {
           method: "POST",
-          body: JSON.stringify(subscription),
+          body: JSON.stringify({ subscription }),
           headers: {
             "Content-Type": "application/json"
           }
