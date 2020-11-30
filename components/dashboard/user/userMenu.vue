@@ -6,7 +6,7 @@
   >
     <div
       @click="deleteUser"
-      class="flex cursor-pointer hover:bg-gray-200 justify-between items-center p-2"
+      class="flex cursor-pointer hover:bg-gray-200 justify-between items-center p-3"
     >
       <p>Delete</p>
       <TrashIcon size="1.2x" />

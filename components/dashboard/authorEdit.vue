@@ -1,7 +1,25 @@
 <template>
   <div class="shadow-md my-5 p-5 max-w-xl rounded-md border">
-    <h2 class="text-xl my-5">Author settings</h2>
-
+    <div class="flex justify-between">
+      <h2 class="text-xl my-5">Author settings</h2>
+      <div
+        class="cursor-pointer relative w-20 h-20 border rounded-full flex items-center justify-center border-gray-500"
+      >
+        <picture v-if="author.image || author.image_webp">
+          <img :src="author.image" type="image/png" />
+          <source
+            class="w-full h-full absolute left-0 top-0"
+            :srcset="author.image_webp"
+            type="image/webp"
+          />
+        </picture>
+        <UserIcon
+          v-if="!author.image || !author.image_webp"
+          class="text-gray-500"
+          size="2.5x"
+        />
+      </div>
+    </div>
     <div class="mb-5 text-gray-700">
       <label class="block mb-1" for="forms-helpTextCode">Name</label>
       <input
@@ -62,9 +80,11 @@
 
 <script>
 import success from '@/components/dashboard/modals/success'
+import { UserIcon } from 'vue-feather-icons'
 export default {
   components: {
     success,
+    UserIcon,
   },
   methods: {
     async save() {

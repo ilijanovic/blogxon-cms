@@ -72,6 +72,11 @@ const blogSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
+  enabled: {
+    type: Boolean,
+    required: true,
+    default: true
+  }
 })
 
 export default conn.model<BlogInterface>('Blog', blogSchema)

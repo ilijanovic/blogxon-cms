@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex items-center h-10 px-5 text-gray-100 transition-colors duration-150 bg-gray-700 rounded-md focus:outline-none hover:bg-gray-600 active:bg-gray-700"
+    class="flex items-center h-10 px-5 text-gray-100 transition-colors duration-150 bg-gray-700 rounded-md focus:outline-none hover:bg-gray-800 active:bg-gray-700"
     :class="{ light, disabled }"
   >
     <slot></slot><spinner v-if="loading" />

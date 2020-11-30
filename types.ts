@@ -82,6 +82,7 @@ export interface BlogInterface extends Document {
     slug: string,
     updated: Date,
     ips: string[],
+    enabled: Boolean
 }
 
 export interface BadgeInterface extends Document {
