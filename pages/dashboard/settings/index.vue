@@ -10,12 +10,14 @@
         </NuxtLink>
       </div>
     </div>
-
-    <div class="flex flex-wrap">
-      <userCard :user="user" v-for="user in users" :key="user._id" />
+    <div>
+      <div class="flex flex-wrap">
+        <authorEdit class="flex-1 mr-3" @refresh="$fetch()" :author="author" />
+        <div class="flex-1">
+          <userCard :user="user" v-for="user in users" :key="user._id" />
+        </div>
+      </div>
     </div>
-
-    <authorEdit @refresh="$fetch()" :author="author" />
   </div>
 </template>
 
