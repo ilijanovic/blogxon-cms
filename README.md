@@ -200,9 +200,10 @@ You can also write errors to the log file.
 Import the `errorService` instance and use the `writeErrorLog` method:
 
 ```javascript
+import { errorService } from '../blogxon'
 try {
     let blog = await someRequest(...)
 }catch(err) {
-    await writeErrorLog(err, "name of the method where it happend")
+    await errorService.writeErrorLog(err, "name of the method where it happend")
 }
 ```
