@@ -4,10 +4,10 @@
 			<style>
 				@keyframes  {
 					0% {
-						transform: scale(1.03);
+						border: 1px solid #dadada;
 					}
 					100% {
-						transform: scale(0.97);
+						border: 5px solid #dadada;
 					}
 				}
 				.container {
@@ -32,6 +32,7 @@
 					color: white;
 					text-align: center;
                     border-radius: 20px;
+                    animation: pulse ease-in-out 1s infinite alternate;
 				}
 				h1 {
 					font-size: 50px;
@@ -44,7 +45,7 @@
 						0 3px 0 #efefef,
 						0 4px 0 #efefef,
 						0 12px 5px rgba(0, 0, 0, 0.1);
-					animation: pulse ease-in-out 1s infinite alternate;
+					
 				}
 			</style>
 			<div class="container">
